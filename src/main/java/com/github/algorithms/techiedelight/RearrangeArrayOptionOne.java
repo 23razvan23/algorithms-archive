@@ -1,8 +1,6 @@
 package com.github.algorithms.techiedelight;
 
 
-import java.util.Arrays;
-
 public class RearrangeArrayOptionOne implements IRearrangeArray {
 
     /**

@@ -11,18 +11,25 @@ public class RearrangeArrayOptionTwo implements IRearrangeArray {
      */
     public void rearrangeArray(int[] array) {
         for (int i = 1; i < array.length - 1; i = i + 2) {
-            if (array[i - 1] > array[i]) {
-                swap(array, i - 1, i);
+            final int previousValue = array[i - 1];
+            int currentValue = array[i];
+            final int nextValue = array[i + 1];
+
+            if (previousValue > currentValue) {
+                swap(array, previousValue, currentValue, i - 1, i);
+                //current value is updated by the first swap
+                currentValue = array[i];
             }
-            if (array[i] < array[i + 1]) {
-                swap(array, i, i + 1);
+
+
+            if (currentValue < nextValue) {
+                swap(array, currentValue, nextValue, i, i + 1);
             }
         }
     }
 
-    private void swap(int[] array, int fromIndex, int toIndex) {
-        int temp = array[fromIndex];
-        array[fromIndex] = array[toIndex];
-        array[toIndex] = temp;
+    private void swap(int[] array, int fromValue, int toValue, int fromIndex, int toIndex) {
+        array[fromIndex] = toValue;
+        array[toIndex] = fromValue;
     }
 }

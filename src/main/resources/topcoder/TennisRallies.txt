@@ -1,0 +1,66 @@
+https://community.topcoder.com/stat?c=problem_statement&pm=1802
+
+Problem Statement
+You are practicing your tennis game with a hitting partner. Each time the ball comes over the net a player can either hit it cross-court, or down-the-line. In this problem, a sequence of shots will be denoted by a String composed of (quotes for clarity) the letters 'c' and 'd', representing cross-court and down-the-line shots respectively. For example, "cccddc" would be such a sequence consisting of 3 cross-courts, 2 down-the-lines, and a final cross-court.
+
+Since you are going to practice a particular play strategy there are certain shot sequences you will avoid. You are given a String[] forbidden containing precisely which sequences must be avoided. For example, if (quotes for clarity) "ccd" is an element of forbidden then you should never allow 2 cross-court shots followed by a down-the-line shot to occur consecutively at any point in the rally. If you were a professional, a single forbidden sequence might cause you to stop hitting. Since you are an amateur, you are willing to let allowed distinct forbidden sequences to occur before you stop. For example, if allowed was 2, the second forbidden sequence would terminate the hitting sequence.
+
+You will return the number of distinct hitting sequences of length numLength which contain fewer than allowed forbidden sequences. Two hitting sequences are distinct if they differ at some stroke in the sequence. Two forbidden sequences are distinct if they differ in length, or position in the hitting sequence they begin at. For example, if forbidden = {"cc","cd","ccd"} then the sequence "ccccdd" has 5 distinct forbidden sequences (3 distinct "cc" sequences, a "cd" sequence, and a "ccd" sequence).
+
+
+Definition
+
+Class:	TennisRallies
+Method:	howMany
+Parameters:	int, String[], int
+Returns:	int
+Method signature:	int howMany(int numLength, String[] forbidden, int allowed)
+(be sure your method is public)
+
+
+Constraints
+-	numLength will be between 1 and 18 inclusive
+-	forbidden will contain between 0 and 10 elements inclusive
+-	allowed will be between 1 and 100 inclusive
+-	forbidden will contain no repeated elements
+-	Each element of forbidden will contain between 1 and 18 'c's and 'd's inclusive (quotes for clarity; both are lowercase)
+
+Examples
+0)
+3
+{"cc","dd"}
+1
+Returns: 2
+Since allowed is 1, neither "cc" nor "dd" can occur anywhere in a valid sequence. The only possible sequences are thus "cdc" and "dcd".
+
+1)
+10
+{"c"}
+1
+Returns: 1
+There is exactly 1 sequence with 10 shots that contains no cross-court shots.
+
+2)
+10
+{"c"}
+2
+Returns: 11
+There are 11 sequences that contain at most 1 cross-court shot.
+
+3)
+18
+{"c","d"}
+1
+Returns: 0
+
+4)
+18
+{}
+1
+Returns: 262144
+
+5)
+18
+{"c","cc","ccc","cccc","ccccc","cccccc","ccccccc", "cccccccc","ccccccccc","cccccccccc"}
+100
+Returns: 262122

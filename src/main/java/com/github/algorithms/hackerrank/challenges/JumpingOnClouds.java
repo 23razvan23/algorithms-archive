@@ -1,4 +1,4 @@
-package com.github.algorithms.hackerrank;
+package com.github.algorithms.hackerrank.challenges;
 
 public class JumpingOnClouds {
     public static void main(String[] args) {

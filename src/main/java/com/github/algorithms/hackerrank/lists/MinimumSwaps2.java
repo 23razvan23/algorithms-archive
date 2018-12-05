@@ -1,4 +1,4 @@
-package com.github.algorithms.hackerrank;
+package com.github.algorithms.hackerrank.lists;
 
 public class MinimumSwaps2 {
 

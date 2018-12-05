@@ -1,4 +1,4 @@
-package com.github.algorithms.hackerrank;
+package com.github.algorithms.hackerrank.challenges;
 
 /**
  * It's New Year's Day and everyone's in line for the Wonderland rollercoaster ride! There are a number of people queued up, and each person wears a sticker indicating their initial position in the queue. Initial positions increment by  from  at the front of the line to  at the back.

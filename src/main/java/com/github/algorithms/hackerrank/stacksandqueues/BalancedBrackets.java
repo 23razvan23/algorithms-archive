@@ -1,9 +1,12 @@
-package com.github.algorithms.hackerrank.stacksandqueus;
+package com.github.algorithms.hackerrank.stacksandqueues;
 
 
 import java.util.*;
 
 public class BalancedBrackets {
+
+    public static final String RESULT_YES = "YES";
+    public static final String RESULT_NO = "NO";
 
     public static void main(String[] args) {
         //NO
@@ -33,12 +36,12 @@ public class BalancedBrackets {
                 bracketsStack.push(bracket);
             } else {
                 if (!isClosingLastBracket(bracketsStack, bracket)) {
-                    return "NO";
+                    return RESULT_NO;
                 }
             }
         }
 
-        return bracketsStack.isEmpty() ? "YES" : "NO";
+        return bracketsStack.isEmpty() ? RESULT_YES : RESULT_NO;
     }
 
     private static boolean isOpeningBracket(char bracket) {
@@ -47,15 +50,14 @@ public class BalancedBrackets {
 
     private static boolean isClosingLastBracket(Stack<Character> bracketsStack, char closingBracket) {
         try {
-            Character lastOpeningBracket = bracketsStack.pop();
-            return reversed(closingBracket).equals(lastOpeningBracket);
+            return bracketsStack.pop().equals(reversed(closingBracket));
         } catch (EmptyStackException e) {
             return false;
         }
     }
 
-    private static Character reversed(char c) {
-        return bracketPairs.get(c);
+    private static Character reversed(char bracket) {
+        return bracketPairs.get(bracket);
     }
 
     private static Set<Character> initOpeningBrackets() {

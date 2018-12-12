@@ -1,7 +1,10 @@
 package com.github.algorithms.hackerrank.stacksandqueues.largestrectangle;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Predicate;
+
+import static com.github.algorithms.hackerrank.stacksandqueues.largestrectangle.Direction.LEFT;
+import static com.github.algorithms.hackerrank.stacksandqueues.largestrectangle.Direction.RIGHT;
 
 public class LargestRectangle {
 
@@ -17,15 +20,13 @@ public class LargestRectangle {
     }
 
     static long largestRectangle(int[] h) {
-        List<Rectangle> rectangles = new ArrayList<>();
         int largestRectangle = 0;
 
         for (int i = 0; i < h.length; i++) {
             Rectangle rectangle = new Rectangle(h[i]);
-            rectangles.add(rectangle);
 
-            scanLeftNeighbours(rectangles);
-            scanRightNeighbours(h, i, rectangle);
+            scanNeighbours(LEFT, h, new AtomicInteger(i), rectangle);
+            scanNeighbours(RIGHT, h, new AtomicInteger(i), rectangle);
 
             if (rectangle.size() > largestRectangle) {
                 largestRectangle = rectangle.size();
@@ -35,19 +36,13 @@ public class LargestRectangle {
         return largestRectangle;
     }
 
-    private static void scanLeftNeighbours(List<Rectangle> rectangles) {
-        int position = rectangles.size() - 1;
-        Rectangle rectangle = rectangles.get(position);
+    private static void scanNeighbours(Direction direction, int[] heights, final AtomicInteger position, Rectangle rectangle) {
+        Predicate<Direction> directionPredicate = d ->
+                LEFT == direction ? position.decrementAndGet() >= 0
+                        : RIGHT == direction && position.incrementAndGet() < heights.length;
 
-        while (--position >= 0
-                && isValidNeighbour(rectangles.get(position).height(), rectangle.height())) {
-            rectangle.increaseSize();
-        }
-    }
-
-    private static void scanRightNeighbours(int[] heights, int position, Rectangle rectangle) {
-        while (++position < heights.length
-                && isValidNeighbour(heights[position], rectangle.height())) {
+        while (directionPredicate.test(direction)
+                && isValidNeighbour(heights[position.intValue()], rectangle.height())) {
             rectangle.increaseSize();
         }
     }
